@@ -1,0 +1,288 @@
+/* RSVP Form Styles */
+.rsvp-form-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    display: none;
+}
+
+.rsvp-form-modal {
+    background: #f8f8f8;
+    border-radius: 0;
+    max-width: 500px;
+    width: 90%;
+    max-height: 90vh;
+    overflow-y: auto;
+    position: relative;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+.rsvp-form-close {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    color: #666;
+    z-index: 10;
+}
+
+.rsvp-form-content {
+    padding: 40px 30px;
+    text-align: center;
+}
+
+.rsvp-form-step {
+    display: none;
+}
+
+.rsvp-form-step.active {
+    display: block;
+}
+
+.rsvp-form-title {
+    font-size: 18px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    margin-bottom: 8px;
+    color: #333;
+    text-transform: uppercase;
+}
+
+.rsvp-form-subtitle {
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 25px;
+    line-height: 1.4;
+}
+
+.rsvp-form-event-title {
+    font-size: 24px;
+    font-weight: 600;
+    letter-spacing: 3px;
+    margin-bottom: 15px;
+    color: #333;
+    text-transform: uppercase;
+}
+
+.rsvp-form-event-details {
+    margin-bottom: 25px;
+}
+
+.rsvp-form-event-details p {
+    margin: 5px 0;
+    font-size: 16px;
+    color: #333;
+}
+
+.rsvp-form-input {
+    width: 100%;
+    padding: 12px 15px;
+    border: 2px solid #ddd;
+    font-size: 16px;
+    margin-bottom: 20px;
+    background: white;
+    color: #333;
+}
+
+.rsvp-form-input:focus {
+    outline: none;
+    border-color: #8B9467;
+}
+
+.rsvp-search-results {
+    text-align: left;
+    border: 2px solid #ddd;
+    background: white;
+    max-height: 200px;
+    overflow-y: auto;
+    margin-bottom: 20px;
+    display: none;
+}
+
+.rsvp-search-item {
+    padding: 12px 15px;
+    cursor: pointer;
+    border-bottom: 1px solid #eee;
+    transition: background-color 0.2s;
+}
+
+.rsvp-search-item:hover {
+    background-color: #f5f5f5;
+}
+
+.rsvp-search-item:last-child {
+    border-bottom: none;
+}
+
+.rsvp-guest-list {
+    margin: 25px 0;
+}
+
+.rsvp-guest-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 0;
+    border-bottom: 1px solid #eee;
+}
+
+.rsvp-guest-item:last-child {
+    border-bottom: none;
+}
+
+.rsvp-guest-name {
+    font-size: 16px;
+    color: #333;
+    font-weight: 500;
+}
+
+.rsvp-guest-buttons {
+    display: flex;
+    gap: 10px;
+}
+
+.rsvp-btn {
+    padding: 8px 20px;
+    border: 2px solid #8B9467;
+    background: #8B9467;
+    color: white;
+    cursor: pointer;
+    font-size: 14px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    transition: all 0.2s;
+}
+
+.rsvp-btn.active {
+    background: #5A6B3A !important;
+    border-color: #5A6B3A !important;
+    color: white !important;
+    opacity: 1 !important;
+}
+
+.rsvp-btn:hover {
+    background: #7A8259;
+    border-color: #7A8259;
+}
+
+.rsvp-btn-outline {
+    background: transparent;
+    color: #8B9467;
+}
+
+.rsvp-btn-outline:hover {
+    background: #8B9467;
+    color: white;
+}
+
+.rsvp-btn-primary {
+    width: 100%;
+    padding: 15px;
+    font-size: 16px;
+    letter-spacing: 2px;
+    margin-top: 20px;
+}
+
+.rsvp-btn-back {
+    background: transparent;
+    color: #666;
+    border-color: #666;
+    margin-right: 15px;
+}
+
+.rsvp-btn-back:hover {
+    background: #666;
+    color: white;
+}
+
+.rsvp-form-textarea {
+    width: 100%;
+    padding: 12px 15px;
+    border: 2px solid #ddd;
+    font-size: 16px;
+    margin-bottom: 20px;
+    background: white;
+    color: #333;
+    min-height: 100px;
+    resize: vertical;
+}
+
+.rsvp-form-textarea:focus {
+    outline: none;
+    border-color: #8B9467;
+}
+
+.rsvp-form-buttons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 30px;
+}
+
+.rsvp-thank-you {
+    text-align: center;
+    padding: 20px 0;
+}
+
+.rsvp-thank-you h3 {
+    font-size: 24px;
+    margin-bottom: 20px;
+    color: #333;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.rsvp-thank-you p {
+    font-size: 16px;
+    line-height: 1.5;
+    color: #666;
+    margin-bottom: 15px;
+}
+
+.rsvp-loading {
+    text-align: center;
+    padding: 20px;
+    color: #666;
+}
+
+@media (max-width: 768px) {
+    .rsvp-form-modal {
+        width: 95%;
+        max-height: 95vh;
+    }
+    
+    .rsvp-form-content {
+        padding: 30px 20px;
+    }
+    
+    .rsvp-guest-item {
+        flex-direction: column;
+        gap: 10px;
+        text-align: center;
+    }
+    
+    .rsvp-guest-buttons {
+        width: 100%;
+        justify-content: center;
+    }
+    
+    .rsvp-form-buttons {
+        flex-direction: column;
+        gap: 15px;
+    }
+    
+    .rsvp-btn-back {
+        margin-right: 0;
+        width: 100%;
+    }
+} 

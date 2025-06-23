@@ -1,0 +1,43 @@
+.btn {
+    font-family: var(--bs-font-sans-serif);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: max-content;
+    min-width: 210px;
+    height: 45px;
+    padding: 10px 20px;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    letter-spacing: 3.2px;
+    text-transform: uppercase;
+
+    @media only screen and (min-width: 1200px) {
+        min-width: 230px;
+        height: 60px;
+        padding: 10px 30px;
+        font-size: 18px;
+        letter-spacing: 3.6px;
+    }
+
+    &-primary {
+        background-color: transparent;
+        border: 1px solid var(--bs-primary);
+        color: var(--bs-primary);
+
+        &-small {
+            width: max-content;
+            min-width: auto;
+            margin: 0 auto;
+            height: 35px;
+            border: 1px solid var(--bs-primary);
+        }
+    }
+
+    &-secondary {
+        background-color: var(--bs-primary);
+        color: var(--bs-yellow-200);
+    }
+}
