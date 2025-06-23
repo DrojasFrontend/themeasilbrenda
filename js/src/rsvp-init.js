@@ -197,7 +197,6 @@ export function initRSVPForm() {
     const closeButton = document.querySelector('.rsvp-form-close');
     
     if (!rsvpContainer) {
-        console.log('❌ Contenedor RSVP no encontrado');
         return;
     }
     
@@ -206,9 +205,7 @@ export function initRSVPForm() {
     
     // Event listener directo para el botón de cerrar
     if (closeButton) {
-        console.log('✅ Botón de cerrar encontrado, añadiendo event listener directo');
         closeButton.addEventListener('click', function(e) {
-            console.log('🔴 Click directo en botón de cerrar');
             e.preventDefault();
             e.stopPropagation();
             closeRSVPForm();
@@ -222,7 +219,6 @@ export function initRSVPForm() {
         searchInput.addEventListener('input', searchGuests);
     }
     
-    console.log('✅ RSVP inicializado correctamente');
 }
 
 function setupRSVPEventListeners() {
@@ -236,14 +232,12 @@ function setupRSVPEventListeners() {
         
         // Cerrar formulario - verificar tanto el botón como el span interno
         if (e.target.matches('.rsvp-form-close') || e.target.closest('.rsvp-form-close')) {
-            console.log('🔴 Botón de cerrar clickeado');
             e.preventDefault();
             closeRSVPForm();
         }
         
         // Cerrar al hacer click en el overlay de fondo
         if (e.target.matches('#rsvp-form-container')) {
-            console.log('🔴 Click en overlay - cerrando modal');
             closeRSVPForm();
         }
         
@@ -279,12 +273,10 @@ function openRSVPForm() {
         document.body.style.overflow = 'hidden';
     }
     showStep(1);
-    console.log('Formulario RSVP abierto. Datos cargados:', invitedGuests);
 }
 
 // Cerrar formulario RSVP
 function closeRSVPForm() {
-    console.log('🔴 closeRSVPForm() llamada');
     const rsvpContainer = document.getElementById('rsvp-form-container');
     
     if (!rsvpContainer) {
@@ -292,24 +284,20 @@ function closeRSVPForm() {
         return;
     }
     
-    console.log('✅ Contenedor encontrado, cerrando...');
     
     // Verificar si Bootstrap está disponible
     if (typeof bootstrap !== 'undefined' && bootstrap.Modal) {
-        console.log('🔄 Usando Bootstrap Modal');
         const modal = bootstrap.Modal.getInstance(rsvpContainer);
         if (modal) {
             modal.hide();
         }
     } else {
-        console.log('🔄 Usando fallback (sin Bootstrap)');
         // Fallback para cuando Bootstrap no esté disponible
         rsvpContainer.style.display = 'none';
         rsvpContainer.classList.remove('show');
         document.body.style.overflow = 'auto';
     }
     resetForm();
-    console.log('✅ Modal cerrado y formulario reseteado');
 }
 
 // Resetear formulario
@@ -368,8 +356,6 @@ function searchGuests() {
     const searchResults = document.getElementById('search-results');
     const query = searchInput.value.toLowerCase().trim();
     
-    console.log('Buscando:', query);
-    console.log('Invitados disponibles:', Object.keys(invitedGuests));
     
     if (query.length < 2) {
         searchResults.style.display = 'none';
@@ -380,7 +366,6 @@ function searchGuests() {
         name.toLowerCase().includes(query)
     );
     
-    console.log('Coincidencias encontradas:', matches);
     
     if (matches.length > 0) {
         searchResults.innerHTML = matches.map(name => 
@@ -474,14 +459,11 @@ function setupAdditionalInfoStep() {
 // Establecer respuesta del invitado
 function setGuestResponse(guestName, response, eventId) {
     rsvpState.rsvpData[eventId][guestName] = response;
-    console.log('Respuesta establecida:', guestName, response, 'para evento:', eventId);
-    console.log('Datos actuales:', rsvpState.rsvpData);
     updateEventButtons(eventId);
 }
 
 // Actualizar botones de evento específico
 function updateEventButtons(eventId) {
-    console.log('Actualizando botones para evento:', eventId);
     
     const container = document.getElementById(`guest-list-${eventId}`);
     if (!container) return;
@@ -523,7 +505,6 @@ function updateEventButtons(eventId) {
                 btn.style.color = '#767A61';
                 btn.style.borderColor = '#767A61';
                 btn.style.opacity = '1';
-                console.log('Botón marcado como activo:', guest, btnResponse, eventId);
             } else {
                 // Marcar como inactivo
                 btn.style.backgroundColor = '#fff';
@@ -596,13 +577,6 @@ function submitRSVP() {
     // Mostrar loading
     document.getElementById('step-6').innerHTML = '<div class="rsvp-loading">Enviando...</div>';
     
-    // Para testing en local - mostrar datos en consola
-    console.log('=== DATOS RSVP PARA ENVÍO ===');
-    console.log('Invitado principal:', rsvpState.selectedGuest);
-    console.log('Email:', emailInput.value.trim());
-    console.log('Alergias:', allergyInput.value.trim() || 'Ninguna');
-    console.log('Respuestas por evento:', processedData);
-    
     // Construir body correctamente
     const formData = new FormData();
     formData.append('action', 'submit_rsvp');
@@ -612,34 +586,26 @@ function submitRSVP() {
     formData.append('guests', JSON.stringify(processedData));
     
     // Debug: Mostrar lo que se va a enviar
-    console.log('FormData enviada:');
-    for (let [key, value] of formData.entries()) {
-        console.log(key + ':', value);
-    }
+    // for (let [key, value] of formData.entries()) {
+    //     console.log(key + ':', value);
+    // }
     
     // Debug: Verificar JSON antes de enviar
     const jsonString = JSON.stringify(processedData);
-    console.log('JSON String length:', jsonString.length);
-    console.log('JSON String first 200 chars:', jsonString.substring(0, 200));
-    console.log('JSON String last 200 chars:', jsonString.substring(jsonString.length - 200));
     
     fetch(window.location.href, {
         method: 'POST',
         body: formData
     })
     .then(response => {
-        console.log('Response status:', response.status);
         if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);
         }
         return response.text(); // Primero como texto para debugging
     })
     .then(text => {
-        console.log('Response text:', text);
         const data = JSON.parse(text);
         if (data.success) {
-            console.log('✅ RSVP enviado exitosamente');
-            console.log('Datos confirmados:', data.debug);
             showStep(7);
         } else {
             console.error('❌ Error al enviar RSVP:', data.message);
@@ -653,7 +619,6 @@ function submitRSVP() {
         console.error('❌ Error de conexión:', error);
         // En local, simular éxito para testing
         if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
-            console.log('🔧 MODO LOCAL: Simulando envío exitoso');
             alert('MODO LOCAL: RSVP procesado (revisa la consola para ver los datos)');
             showStep(7);
         } else {
