@@ -326,6 +326,12 @@ document.addEventListener('DOMContentLoaded', function() {
             console.log(key + ':', value);
         }
         
+        // Debug: Verificar JSON antes de enviar
+        const jsonString = JSON.stringify(processedData);
+        console.log('JSON String length:', jsonString.length);
+        console.log('JSON String first 200 chars:', jsonString.substring(0, 200));
+        console.log('JSON String last 200 chars:', jsonString.substring(jsonString.length - 200));
+        
         fetch(window.location.href, {
             method: 'POST',
             body: formData
