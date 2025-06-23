@@ -304,7 +304,7 @@ strong {
 
 .customSection {
     &Hero {
-        padding-top: 80px;
+        padding-top: 70px;
         height: 600px;
 
         @media only screen and (min-width: 1200px) {
@@ -381,6 +381,25 @@ strong {
                         bottom: 0;
                     }
                 }
+            }
+        }
+    }
+
+    &Rsvp {
+        margin-top: -50px;
+
+        @media only screen and (min-width: 1200px) {
+            margin-top: 0px;
+        }
+
+        .flowerTopLeft {
+            width: 150px;
+            top: -100px;
+            z-index: 1;
+
+            @media only screen and (min-width: 1200px) {
+                width: auto;
+                top: -200px;
             }
         }
     }
@@ -461,7 +480,6 @@ strong {
         margin-top: -80px;
         
         @media only screen and (min-width: 1200px) {
-            height: 800px;
             margin-top: -100px;
         }
 
@@ -519,7 +537,7 @@ strong {
 
         @media only screen and (min-width: 1200px) {
             padding-top: 150px;;
-            margin-top: -100px;
+            margin-top: -110px;
         }
 
         &__img {
@@ -579,9 +597,15 @@ strong {
     }
 }
 
+.-mt-n8 {
+    @media only screen and (min-width: 1200px) {
+        margin-top: -80px;
+    }
+}
+
 /* customPagePlaces */
 .customPagePlaces {
-    margin-top: -100px;
+    margin-top: -110px;
 
 
     .customSectionPlaces {
@@ -743,4 +767,10 @@ iframe {
 
 .rsvp-search-item {
     cursor: pointer;
+}
+
+.position-xl-absolute {
+    @media only screen and (min-width: 1200px) {
+        position: absolute;
+    }
 }

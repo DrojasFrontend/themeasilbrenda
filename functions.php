@@ -20,6 +20,7 @@ define('THEME_IMG', THEME_URL . '/images/');
 require_once THEME_PATH . '/inc/custom-functions.php';
 require_once THEME_PATH . '/inc/styles-and-js.php';
 require_once THEME_PATH . '/inc/theme-setup.php';
+require_once THEME_PATH . '/inc/rsvp-functions.php';
 
 function define_sitemap_constant() {
   define('SITEMAP', get_bloginfo('name'));

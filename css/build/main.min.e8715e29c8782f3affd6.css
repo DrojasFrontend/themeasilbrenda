@@ -8450,7 +8450,7 @@ strong {
 }
 
 .customSectionHero {
-  padding-top: 80px;
+  padding-top: 70px;
   height: 600px;
 }
 @media only screen and (min-width: 1200px) {
@@ -8512,6 +8512,25 @@ strong {
 @media only screen and (min-width: 1200px) {
   .customSectionCountdown .flowerLeftBottom {
     bottom: 0;
+  }
+}
+.customSectionRsvp {
+  margin-top: -50px;
+}
+@media only screen and (min-width: 1200px) {
+  .customSectionRsvp {
+    margin-top: 0px;
+  }
+}
+.customSectionRsvp .flowerTopLeft {
+  width: 150px;
+  top: -100px;
+  z-index: 1;
+}
+@media only screen and (min-width: 1200px) {
+  .customSectionRsvp .flowerTopLeft {
+    width: auto;
+    top: -200px;
   }
 }
 
@@ -8582,7 +8601,6 @@ strong {
 }
 @media only screen and (min-width: 1200px) {
   .customSectionPlaces2 {
-    height: 800px;
     margin-top: -100px;
   }
 }
@@ -8628,7 +8646,7 @@ strong {
 @media only screen and (min-width: 1200px) {
   .customPageGallery .customSectionHero {
     padding-top: 150px;
-    margin-top: -100px;
+    margin-top: -110px;
   }
 }
 .customPageGallery .customSectionHero__img-right-bottom {
@@ -8674,9 +8692,15 @@ strong {
   }
 }
 
+@media only screen and (min-width: 1200px) {
+  .-mt-n8 {
+    margin-top: -80px;
+  }
+}
+
 /* customPagePlaces */
 .customPagePlaces {
-  margin-top: -100px;
+  margin-top: -110px;
 }
 .customPagePlaces .customSectionPlaces__radius {
   padding-top: 50px !important;
@@ -8833,4 +8857,10 @@ iframe {
 
 .rsvp-search-item {
   cursor: pointer;
+}
+
+@media only screen and (min-width: 1200px) {
+  .position-xl-absolute {
+    position: absolute;
+  }
 }

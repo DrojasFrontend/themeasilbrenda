@@ -1,83 +1,41 @@
 <?php
-require_once 'rsvp-data.php';
+/**
+ * Funciones del sistema RSVP
+ * Archivo separado para mejor organización del código
+ */
 
-// Manejar peticiones AJAX
-if ($_POST) {
-    $action = $_POST['action'] ?? '';
-    
-    switch ($action) {
-        case 'get_guests':
-            handleGetGuests();
-            break;
-        case 'submit_rsvp':
-            handleSubmitRSVP();
-            break;
-    }
-    exit;
+/**
+ * Configuración SMTP para WordPress
+ */
+function configurar_smtp($phpmailer) {
+    $phpmailer->isSMTP();
+    $phpmailer->Host = 'smtp.hostinger.com';
+    $phpmailer->SMTPAuth = true;
+    $phpmailer->Port = 465;
+    $phpmailer->Username = 'rsvp@mariaypatrick.com';
+    $phpmailer->Password = 'x6?XNnYsO';
+    $phpmailer->SMTPSecure = 'ssl';
+    $phpmailer->From = 'rsvp@mariaypatrick.com';
+    $phpmailer->FromName = 'Asil & Brenda\'s Wedding';
 }
 
-function handleGetGuests() {
-    global $rsvp_invitados;
-    
-    header('Content-Type: application/json');
-    echo json_encode($rsvp_invitados);
-}
+// Hook para WordPress
+add_action('phpmailer_init', 'configurar_smtp');
 
-function handleSubmitRSVP() {
-    try {
-        $guest_name = $_POST['guest_name'] ?? '';
-        $guests = json_decode($_POST['guests'] ?? '{}', true);
-        $allergies = $_POST['allergies'] ?? '';
-        $email = $_POST['email'] ?? '';
-        
-        if (empty($guest_name) || empty($guests) || empty($email)) {
-            throw new Exception('Faltan datos requeridos');
-        }
-        
-        // Validar email
-        if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-            throw new Exception('Email inválido');
-        }
-        
-        // Enviar emails
-        $admin_sent = sendAdminEmail($guest_name, $guests, $allergies, $email);
-        $guest_sent = sendGuestEmail($guest_name, $email);
-        
-        if ($admin_sent && $guest_sent) {
-            header('Content-Type: application/json');
-            echo json_encode(['success' => true, 'message' => 'RSVP enviado correctamente']);
-        } else {
-            throw new Exception('Error al enviar emails');
-        }
-        
-    } catch (Exception $e) {
-        header('Content-Type: application/json');
-        echo json_encode(['success' => false, 'message' => $e->getMessage()]);
-    }
-}
-
+/**
+ * Función para enviar email al administrador
+ */
 function sendAdminEmail($guest_name, $guests, $allergies, $email) {
     $admin_email = 'rsvp@mariaypatrick.com';
     $subject = '✉️ Nuevo RSVP - ' . $guest_name;
     
     // Generar lista detallada por evento
-    $event_details = '';
     $event_names = [
         'ceremony' => 'CEREMONY (Dec 13th, 5:00 PM)',
         'reception' => 'RECEPTION (Dec 13th, Following ceremony)',
         'welcome' => 'WELCOME PARTY (Dec 12th, 6:00 PM)',
         'brunch' => 'FAREWELL BRUNCH (Dec 14th, 10:00 AM - 2:00 PM)'
     ];
-    
-    foreach ($event_names as $event_id => $event_name) {
-        $event_details .= "\n📅 {$event_name}\n";
-        if (isset($guests[$event_id])) {
-            foreach ($guests[$event_id] as $name => $response) {
-                $status = $response === 'accept' ? '✅ ACEPTA' : '❌ DECLINA';
-                $event_details .= "   • {$name}: {$status}\n";
-            }
-        }
-    }
     
     $total_accepts = 0;
     $total_declines = 0;
@@ -159,6 +117,9 @@ function sendAdminEmail($guest_name, $guests, $allergies, $email) {
     return wp_mail($admin_email, $subject, $message, $headers);
 }
 
+/**
+ * Función para enviar email al invitado
+ */
 function sendGuestEmail($guest_name, $email) {
     $subject = '💌 Confirmación RSVP - Asil & Brenda\'s Wedding';
     
@@ -277,4 +238,121 @@ function sendGuestEmail($guest_name, $email) {
     
     return wp_mail($email, $subject, $message, $headers);
 }
-?> 
+
+/**
+ * Manejar peticiones AJAX del RSVP
+ */
+function handle_rsvp_ajax() {
+    if ($_POST && isset($_POST['action'])) {
+        $action = $_POST['action'];
+        
+        if ($action === 'get_guests') {
+            global $rsvp_invitados;
+            header('Content-Type: application/json');
+            echo json_encode($rsvp_invitados);
+            exit;
+        }
+        
+        if ($action === 'submit_rsvp') {
+            try {
+                // Obtener datos
+                $guest_name = $_POST['guest_name'] ?? '';
+                $guests_json = $_POST['guests'] ?? '{}';
+                $allergies = $_POST['allergies'] ?? '';
+                $email = $_POST['email'] ?? '';
+                
+                // Debug: Log datos recibidos RAW
+                error_log('DATOS RAW: ' . print_r($_POST, true));
+                error_log('JSON RAW LENGTH: ' . strlen($guests_json));
+                error_log('JSON RAW FIRST 500 CHARS: ' . substr($guests_json, 0, 500));
+                
+                // Múltiples intentos de limpiar y decodificar JSON
+                $guests = null;
+                $attempts = [
+                    $guests_json, // Original
+                    trim($guests_json), // Trimmed
+                    stripslashes($guests_json), // Sin slashes
+                    trim(stripslashes($guests_json)), // Ambos
+                    html_entity_decode($guests_json), // Decode entities
+                    urldecode($guests_json) // URL decode
+                ];
+                
+                foreach ($attempts as $i => $attempt) {
+                    error_log("Intento {$i}: " . substr($attempt, 0, 100));
+                    $guests = json_decode($attempt, true);
+                    if ($guests !== null && is_array($guests)) {
+                        error_log("✅ JSON decodificado exitosamente en intento {$i}");
+                        break;
+                    }
+                    error_log("❌ Intento {$i} falló: " . json_last_error_msg());
+                }
+                
+                // Debug: Resultado final
+                error_log('JSON decode result: ' . print_r($guests, true));
+                error_log('Final JSON error: ' . json_last_error_msg());
+                error_log('Is array check: ' . ($guests ? 'true' : 'false'));
+                error_log('Array check: ' . (is_array($guests) ? 'true' : 'false'));
+                
+                // Validaciones mejoradas
+                if (empty($guest_name)) {
+                    throw new Exception('Falta el nombre del invitado principal');
+                }
+                
+                if (empty($email)) {
+                    throw new Exception('Falta el email');
+                }
+                
+                if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+                    throw new Exception('Email inválido');
+                }
+                
+                // Validación final
+                if ($guests === null || $guests === false || !is_array($guests)) {
+                    error_log('❌ TODOS LOS INTENTOS DE JSON FALLARON');
+                    error_log('Raw JSON completo: ' . $guests_json);
+                    throw new Exception('Error al decodificar JSON de invitados - formato inválido');
+                }
+                
+                if (!is_array($guests)) {
+                    throw new Exception('Los datos de invitados no son un array válido');
+                }
+                
+                if (count($guests) === 0) {
+                    throw new Exception('No hay datos de eventos en el RSVP');
+                }
+                
+                // Log de datos procesados
+                error_log('RSVP procesado exitosamente: ' . print_r([
+                    'guest' => $guest_name,
+                    'email' => $email,
+                    'allergies' => $allergies,
+                    'guests_count' => count($guests)
+                ], true));
+                
+                // Enviar emails reales
+                $admin_sent = sendAdminEmail($guest_name, $guests, $allergies, $email);
+                $guest_sent = sendGuestEmail($guest_name, $email);
+                
+                // Respuesta con estado de emails
+                header('Content-Type: application/json');
+                echo json_encode([
+                    'success' => true, 
+                    'message' => 'RSVP enviado correctamente',
+                    'debug' => [
+                        'guest_name' => $guest_name,
+                        'email' => $email,
+                        'guests_events' => array_keys($guests),
+                        'admin_email_sent' => $admin_sent,
+                        'guest_email_sent' => $guest_sent
+                    ]
+                ]);
+                
+            } catch (Exception $e) {
+                error_log('ERROR RSVP: ' . $e->getMessage());
+                header('Content-Type: application/json');
+                echo json_encode(['success' => false, 'message' => $e->getMessage()]);
+            }
+            exit;
+        }
+    }
+} 

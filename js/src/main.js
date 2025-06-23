@@ -8,6 +8,7 @@ import {
 } from "./swiper-init";
 import { initClickableCards } from "./card-click-init";
 import { initCountdown } from "./countdown-init";
+import { initRSVPForm } from "./rsvp-init";
 
 
 let Main = {
@@ -32,6 +33,11 @@ let Main = {
 				if (targetDate && containerId) {
 					initCountdown(targetDate, containerId);
 				}
+			}
+
+			// Inicializar formulario RSVP
+			if (document.getElementById('rsvp-form-container')) {
+				initRSVPForm();
 			}
 		});
 	},
