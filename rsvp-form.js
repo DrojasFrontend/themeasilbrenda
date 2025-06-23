@@ -40,16 +40,34 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Abrir formulario RSVP
     function openRSVPForm() {
-        rsvpContainer.style.display = 'flex';
-        document.body.style.overflow = 'hidden';
+        // Verificar si Bootstrap está disponible
+        if (typeof bootstrap !== 'undefined' && bootstrap.Modal) {
+            const modal = new bootstrap.Modal(rsvpContainer);
+            modal.show();
+        } else {
+            // Fallback para cuando Bootstrap no esté disponible
+            rsvpContainer.style.display = 'block';
+            rsvpContainer.classList.add('show');
+            document.body.style.overflow = 'hidden';
+        }
         showStep(1);
         console.log('Formulario RSVP abierto. Datos cargados:', invitedGuests);
     }
     
     // Cerrar formulario RSVP
     function closeRSVPForm() {
-        rsvpContainer.style.display = 'none';
-        document.body.style.overflow = 'auto';
+        // Verificar si Bootstrap está disponible
+        if (typeof bootstrap !== 'undefined' && bootstrap.Modal) {
+            const modal = bootstrap.Modal.getInstance(rsvpContainer);
+            if (modal) {
+                modal.hide();
+            }
+        } else {
+            // Fallback para cuando Bootstrap no esté disponible
+            rsvpContainer.style.display = 'none';
+            rsvpContainer.classList.remove('show');
+            document.body.style.overflow = 'auto';
+        }
         resetForm();
     }
     
@@ -115,7 +133,7 @@ document.addEventListener('DOMContentLoaded', function() {
         
         if (matches.length > 0) {
             searchResults.innerHTML = matches.map(name => 
-                `<div class="rsvp-search-item" onclick="selectGuest('${name}')">${name}</div>`
+                `<div class="rsvp-search-item cursor-pointer" onclick="selectGuest('${name}')">${name}</div>`
             ).join('');
             searchResults.style.display = 'block';
         } else {
@@ -152,10 +170,22 @@ document.addEventListener('DOMContentLoaded', function() {
         guestList.forEach((guest, index) => {
             html += `
                 <div class="rsvp-guest-item" data-guest-index="${index}">
-                    <div class="rsvp-guest-name">${guest}</div>
-                    <div class="rsvp-guest-buttons">
-                        <button type="button" class="rsvp-btn" data-guest-name="${guest}" data-response="accept" data-event="${eventId}">Accept</button>
-                        <button type="button" class="rsvp-btn rsvp-btn-outline" data-guest-name="${guest}" data-response="decline" data-event="${eventId}">Decline</button>
+                    <div class="row">
+                        <div class="col-12 col-xl-5">
+                            <div class="rsvp-guest-name fs-xl-4 font-secondary fs-3">${guest}</div>
+                        </div>
+                        <div class="col-12 col-xl-7">
+                            <div class="mb-2">
+                                <div class="row">
+                                    <div class="col-12 col-xl-6">
+                                        <button type="button" class="rsvp-btn w-100 border-1 font-secondary py-2 px-2" data-guest-name="${guest}" data-response="accept" data-event="${eventId}">Accept</button>
+                                    </div>
+                                    <div class="col-12 col-xl-6">
+                                        <button type="button" class="rsvp-btn rsvp-btn-outline rsvp-btn w-100 border-1 font-secondary bg-white-100 py-2 px-2" data-guest-name="${guest}" data-response="decline" data-event="${eventId}">Decline</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             `;
@@ -209,12 +239,12 @@ document.addEventListener('DOMContentLoaded', function() {
             // Restaurar estilos por defecto
             if (btn.classList.contains('rsvp-btn-outline')) {
                 btn.style.backgroundColor = 'transparent';
-                btn.style.color = '#8B9467';
-                btn.style.borderColor = '#8B9467';
+                btn.style.color = '#767A61';
+                btn.style.borderColor = '#767A61';
             } else {
-                btn.style.backgroundColor = '#8B9467';
-                btn.style.color = 'white';
-                btn.style.borderColor = '#8B9467';
+                btn.style.backgroundColor = '#767A61';
+                btn.style.color = '#fff';
+                btn.style.borderColor = '#767A61';
             }
         });
         
@@ -232,16 +262,16 @@ document.addEventListener('DOMContentLoaded', function() {
                 if (btnResponse === response) {
                     // Marcar como activo
                     btn.classList.add('active');
-                    btn.style.backgroundColor = '#5A6B3A';
-                    btn.style.color = 'white';
-                    btn.style.borderColor = '#5A6B3A';
+                    btn.style.backgroundColor = '#fff';
+                    btn.style.color = '#767A61';
+                    btn.style.borderColor = '#767A61';
                     btn.style.opacity = '1';
                     console.log('Botón marcado como activo:', guest, btnResponse, eventId);
                 } else {
                     // Marcar como inactivo
-                    btn.style.backgroundColor = '#E5E5E5';
-                    btn.style.color = '#999';
-                    btn.style.borderColor = '#E5E5E5';
+                    btn.style.backgroundColor = '#fff';
+                    btn.style.color = '#767A61';
+                    btn.style.borderColor = '#767A61';
                     btn.style.opacity = '0.7';
                 }
             });
@@ -385,6 +415,11 @@ document.addEventListener('DOMContentLoaded', function() {
             closeRSVPForm();
         }
         
+        // Botón home (cerrar modal)
+        if (e.target.matches('.rsvp-home-btn')) {
+            closeRSVPForm();
+        }
+        
         // Botón siguiente
         if (e.target.matches('.rsvp-next-btn')) {
             nextStep();
@@ -395,10 +430,7 @@ document.addEventListener('DOMContentLoaded', function() {
             previousStep();
         }
         
-        // Botón home
-        if (e.target.matches('.rsvp-home-btn')) {
-            closeRSVPForm();
-        }
+
     });
     
     // Búsqueda en tiempo real
@@ -406,12 +438,20 @@ document.addEventListener('DOMContentLoaded', function() {
         searchInput.addEventListener('input', searchGuests);
     }
     
-    // Cerrar al hacer click fuera del modal
-    rsvpContainer.addEventListener('click', function(e) {
-        if (e.target === rsvpContainer) {
-            closeRSVPForm();
-        }
-    });
+    // Event listeners para el modal
+    if (typeof bootstrap !== 'undefined' && bootstrap.Modal) {
+        // Event listener para cerrar modal con Bootstrap
+        rsvpContainer.addEventListener('hidden.bs.modal', function() {
+            resetForm();
+        });
+    } else {
+        // Fallback: cerrar al hacer click fuera del modal
+        rsvpContainer.addEventListener('click', function(e) {
+            if (e.target === rsvpContainer) {
+                closeRSVPForm();
+            }
+        });
+    }
     
     // Exponer funciones globalmente
     window.selectGuest = selectGuest;

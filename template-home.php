@@ -312,12 +312,13 @@ if ($_POST && isset($_POST['action'])) {
                 throw new Exception('Error al decodificar JSON de invitados - formato inválido');
             }
             
-            if (count($guests) === 0) {
-                error_log('⚠️ Array de invitados está vacío');
-                throw new Exception('No hay datos de eventos en el RSVP');
+            if (!is_array($guests)) {
+                throw new Exception('Los datos de invitados no son un array válido');
             }
             
-            error_log('✅ JSON procesado correctamente. Eventos: ' . implode(', ', array_keys($guests)));
+            if (count($guests) === 0) {
+                throw new Exception('No hay datos de eventos en el RSVP');
+            }
             
             // Log de datos procesados
             error_log('RSVP procesado exitosamente: ' . print_r([
@@ -809,112 +810,146 @@ $placesCartagena = [
 
     <!-- RSVP Form Modal -->
     <div id="rsvp-form-container" class="rsvp-form-container">
-        <div class="rsvp-form-modal">
-            <button class="rsvp-form-close">&times;</button>
+        <div class="rsvp-form-modal bg-primary-100 p-5 bg-white-100 position-relative">
+            <button type="button" class="rsvp-form-close btn-close p-0 text-black fs-xl-1 fs-1-medium bg-transparent border-0 position-absolute top-0 end-0 me-3">
+                <span aria-hidden="true">&times;</span>
+            </button>
             <div class="rsvp-form-content">
                 <form id="rsvp-form">
                     
                     <!-- Paso 1: Búsqueda -->
                     <div id="step-1" class="rsvp-form-step active">
-                        <h2 class="rsvp-form-title">ASIL & BRENDA'S WEDDING</h2>
-                        <p class="rsvp-form-subtitle">
-                            If you're responding for you and a guest (or your family), you'll be able to RSVP for your entire group.<br><br>
+                        <h2 class="fs-2 text-primary mb-3">ASIL & BRENDA'S <br> WEDDING</h2>
+                        <p class="font-secondary fs-4 text-black">
+                            If you're responding for you and a guest (or your family), you'll be able to RSVP for your entire group.
+                        </p>
+                        <p class="font-secondary fs-4 text-black mb-4">
                             Please enter below your First Name and your Last Name.
                         </p>
-                        <input type="text" id="guest-search" class="rsvp-form-input" placeholder="Full name" autocomplete="off">
-                        <div id="search-results" class="rsvp-search-results"></div>
-                        <button type="button" class="rsvp-btn rsvp-btn-primary" onclick="openRSVPForm()">FIND YOUR INVITATION</button>
+                        <input type="text" id="guest-search" class="w-100 border-1 bg-white-100 p-3 mb-3 font-secondary" placeholder="Full name" autocomplete="off">
+                        <div id="search-results" class="rsvp-search-item fs-4 font-secondary py-3 cursor-pointer"></div>
+                        <button type="button" class="btn btn-secondary w-100 border-0" onclick="openRSVPForm()">FIND YOUR INVITATION</button>
                     </div>
 
                     <!-- Paso 2: CEREMONY -->
                     <div id="step-2" class="rsvp-form-step">
-                        <h2 class="rsvp-form-event-title">CEREMONY</h2>
+                        <h2 class="fs-2 text-primary mb-2">CEREMONY</h2>
                         <div class="rsvp-form-event-details">
-                            <p>December 13th, 2025</p>
-                            <p>Baluarte San Francisco Javier</p>
-                            <p>5:00 P.M.</p>
+                            <p class="fs-4 text-black font-secondary mb-1">December 13th, 2025</p>
+                            <p class="fs-4 text-black font-secondary mb-1">Baluarte San Francisco Javier</p>
+                            <p class="fs-4 text-black font-secondary mb-4">5:00 P.M.</p>
                         </div>
-                        <div id="guest-list-ceremony" class="rsvp-guest-list">
+                        <div id="guest-list-ceremony" class="rsvp-guest-list mt-3">
                             <!-- Se llena dinámicamente con JavaScript -->
                         </div>
                         <div class="rsvp-form-buttons">
-                            <button type="button" class="rsvp-btn rsvp-btn-back rsvp-back-btn">BACK</button>
-                            <button type="button" class="rsvp-btn rsvp-btn-primary rsvp-next-btn">CONTINUE</button>
+                            <div class="row">
+                                <div class="col-12 col-xl-6">
+                                    <button type="button" class="btn btn-primary rsvp-back-btn font-secondary border-1">BACK</button>
+                                </div>
+                                <div class="col-12 col-xl-6">
+                                    <button type="button" class="btn btn-secondary rsvp-next-btn font-secondary border-0">CONTINUE</button>
+                                </div>
+                            </div>
                         </div>
                     </div>
 
                     <!-- Paso 3: RECEPTION -->
                     <div id="step-3" class="rsvp-form-step">
-                        <h2 class="rsvp-form-event-title">RECEPTION</h2>
+                        <h2 class="fs-2 text-primary mb-2">RECEPTION</h2>
                         <div class="rsvp-form-event-details">
-                            <p>December 13th, 2025</p>
-                            <p>Sofitel Legend Santa Clara</p>
-                            <p>BALLROOM</p>
-                            <p>Following the ceremony</p>
+                            <p class="fs-4 text-black font-secondary mb-1">December 13th, 2025</p>
+                            <p class="fs-4 text-black font-secondary mb-1">Sofitel Legend Santa Clara</p>
+                            <p class="fs-4 text-black font-secondary mb-1">BALLROOM</p>
+                            <p class="fs-4 text-black font-secondary">Following the ceremony</p>
                         </div>
-                        <div id="guest-list-reception" class="rsvp-guest-list">
+                        <div id="guest-list-reception" class="rsvp-guest-list mt-3">
                             <!-- Se llena dinámicamente con JavaScript -->
                         </div>
                         <div class="rsvp-form-buttons">
-                            <button type="button" class="rsvp-btn rsvp-btn-back rsvp-back-btn">BACK</button>
-                            <button type="button" class="rsvp-btn rsvp-btn-primary rsvp-next-btn">CONTINUE</button>
+                            <div class="row">
+                                <div class="col-12 col-xl-6">
+                                    <button type="button" class="btn btn-primary rsvp-back-btn font-secondary border-1">BACK</button>
+                                </div>
+                                <div class="col-12 col-xl-6">
+                                    <button type="button" class="btn btn-secondary rsvp-next-btn font-secondary border-0">CONTINUE</button>
+                                </div>
+                            </div>
                         </div>
                     </div>
 
                     <!-- Paso 4: WELCOME PARTY -->
                     <div id="step-4" class="rsvp-form-step">
-                        <h2 class="rsvp-form-event-title">WELCOME PARTY</h2>
+                        <h2 class="fs-2 text-primary mb-2">WELCOME PARTY</h2>
                         <div class="rsvp-form-event-details">
-                            <p>December 12th, 2025</p>
-                            <p>Sofitel Legend Santa Clara</p>
-                            <p>SPA TERRACE</p>
-                            <p>6:00 P.M.</p>
+                            <p class="fs-4 text-black font-secondary mb-1">December 12th, 2025</p>
+                            <p class="fs-4 text-black font-secondary mb-1">Sofitel Legend Santa Clara</p>
+                            <p class="fs-4 text-black font-secondary mb-1">SPA TERRACE</p>
+                            <p class="fs-4 text-black font-secondary">6:00 P.M.</p>
                         </div>
-                        <div id="guest-list-welcome" class="rsvp-guest-list">
+                        <div id="guest-list-welcome" class="rsvp-guest-list mt-3">
                             <!-- Se llena dinámicamente con JavaScript -->
                         </div>
                         <div class="rsvp-form-buttons">
-                            <button type="button" class="rsvp-btn rsvp-btn-back rsvp-back-btn">BACK</button>
-                            <button type="button" class="rsvp-btn rsvp-btn-primary rsvp-next-btn">CONTINUE</button>
+                            <div class="row">
+                                <div class="col-12 col-xl-6">
+                                    <button type="button" class="btn btn-primary rsvp-back-btn font-secondary border-1">BACK</button>
+                                </div>
+                                <div class="col-12 col-xl-6">
+                                    <button type="button" class="btn btn-secondary rsvp-next-btn font-secondary border-0">CONTINUE</button>
+                                </div>
+                            </div>
                         </div>
                     </div>
 
                     <!-- Paso 5: FAREWELL BRUNCH -->
                     <div id="step-5" class="rsvp-form-step">
-                        <h2 class="rsvp-form-event-title">FAREWELL BRUNCH</h2>
+                        <h2 class="fs-2 text-primary mb-2">FAREWELL BRUNCH</h2>
                         <div class="rsvp-form-event-details">
-                            <p>December 14th, 2025</p>
-                            <p>Sofitel Legend Santa Clara</p>
-                            <p>RESTAURANT 1621</p>
-                            <p>10:00 A.M. - 2:00 P.M.</p>
+                            <p class="fs-4 text-black font-secondary mb-1">December 14th, 2025</p>
+                            <p class="fs-4 text-black font-secondary mb-1">Sofitel Legend Santa Clara</p>
+                            <p class="fs-4 text-black font-secondary mb-1">RESTAURANT 1621</p>
+                            <p class="fs-4 text-black font-secondary">10:00 A.M. - 2:00 P.M.</p>
                         </div>
-                        <div id="guest-list-brunch" class="rsvp-guest-list">
+                        <div id="guest-list-brunch" class="rsvp-guest-list mt-3">
                             <!-- Se llena dinámicamente con JavaScript -->
                         </div>
                         <div class="rsvp-form-buttons">
-                            <button type="button" class="rsvp-btn rsvp-btn-back rsvp-back-btn">BACK</button>
-                            <button type="button" class="rsvp-btn rsvp-btn-primary rsvp-next-btn">CONTINUE</button>
+                            <div class="row">
+                                <div class="col-12 col-xl-6">
+                                    <button type="button" class="btn btn-primary rsvp-back-btn font-secondary border-1">BACK</button>
+                                </div>
+                                <div class="col-12 col-xl-6">
+                                    <button type="button" class="btn btn-secondary rsvp-next-btn font-secondary border-0">CONTINUE</button>
+                                </div>
+                            </div>
                         </div>
                     </div>
 
                     <!-- Paso 6: Información Adicional -->
                     <div id="step-6" class="rsvp-form-step">
-                        <h2 class="rsvp-form-title">ADDITIONAL INFO</h2>
-                        <p class="rsvp-form-subtitle">Tell us if you have any food allergies or restrictions</p>
-                        <textarea id="allergies" class="rsvp-form-textarea" placeholder="Food allergies or restrictions..."></textarea>
-                        <input type="email" id="guest-email" class="rsvp-form-input" placeholder="Email address" required>
+                        <h2 class="fs-2 text-primary mb-2">ADDITIONAL INFO</h2>
+                        <p class="fs-4 text-black font-secondary mb-1">Tell us if you have any food <br> allergies or restrictions</p>
+                        <textarea id="allergies" class="p-3 font-secondary w-100 mb-3" placeholder="Food allergies or restrictions..."></textarea>
+                        <input type="email" id="guest-email" class="w-100 font-secondary p-3 mb-3" placeholder="Email address" required>
                         <div class="rsvp-form-buttons">
-                            <button type="button" class="rsvp-btn rsvp-btn-back rsvp-back-btn">BACK</button>
-                            <button type="button" class="rsvp-btn rsvp-btn-primary rsvp-next-btn">R.S.V.P.</button>
+                            <div class="row">
+                                <div class="col-12 col-xl-6">
+                                    <button type="button" class="btn btn-primary rsvp-back-btn font-secondary border-1">BACK</button>
+                                </div>
+                                <div class="col-12 col-xl-6">
+                                    <button type="button" class="btn btn-secondary rsvp-next-btn font-secondary border-0">R.S.V.P.</button>
+                                </div>
+                            </div>
                         </div>
                     </div>
 
                     <!-- Paso 7: Agradecimiento -->
                     <div id="step-7" class="rsvp-form-step">
                         <div class="rsvp-thank-you">
-                            <h3>THANKS</h3>
-                            <p>Thank you for confirming your attendance to our wedding. We are very happy to share this special day with you. We will send a copy of your RSVP to your email.</p>
-                            <button type="button" class="rsvp-btn rsvp-btn-primary rsvp-home-btn">BACK TO HOME</button>
+                            <h3 class="fs-2 text-primary mb-2">THANKS</h3>
+                            <p class="fs-4 text-black font-secondary mb-1 col-xl-8 pe-xl-3">Thank you for confirming your attendance to our wedding. We are very happy to share this special day with you. We will send a copy of your RSVP to your email.</p>
+                            <button type="button" class="rsvp-btn rsvp-btn-primary rsvp-home-btn btn btn-primary w-100">BACK TO HOME</button>
                         </div>
                     </div>
 
@@ -926,7 +961,6 @@ $placesCartagena = [
 </main>
 
 <!-- Incluir CSS y JS del RSVP -->
-<link rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>/rsvp-form.css">
 <script src="<?php echo get_template_directory_uri(); ?>/rsvp-form.js"></script>
 
 <?php 
