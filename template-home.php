@@ -399,7 +399,7 @@ $placesCartagena = [
                         <p class="fs-xl-6-small fs-5 text-black mb-1">5894 Michaux St</p>
                         <p class="fs-xl-6-small fs-5 text-black mb-xl-5 mb-3">Boca Raton, FL 33433</p>
 
-                        <a href="#" class="btn btn-secondary">
+                        <a href="https://www.zola.com/registry/asilandbrenda" target="_blank" class="btn btn-secondary">
                             ZOLA
                         </a>
                     </div>
