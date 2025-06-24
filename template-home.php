@@ -51,7 +51,7 @@ $placesCartagena = [
                 <img class="img-fluid mx-auto d-block d-xl-none position-relative z-1 pt-5 mt-3" src="<?php echo THEME_IMG; ?>hero-mobile.webp" alt="Home 1">
                 <img class="position-absolute top-0 start-0 d-block d-xl-none object-fit-cover w-100 h-100" src="<?php echo THEME_IMG; ?>fondo-hero-mobile.webp" alt="Home 1">
                 <img class="customSectionHero__img-flower-left-top position-absolute top-0 start-0" src="<?php echo THEME_IMG; ?>flower-left.png" alt="Home 1">
-                <img class="customSectionHero__img-flower-left w-auto position-absolute start-0 d-none fs-6-small" src="<?php echo THEME_IMG; ?>flower-left-bottom.png" alt="Home 1">
+                <img class="customSectionHero__img-flower-left w-auto position-absolute start-0 d-none d-xl-block fs-6-small" src="<?php echo THEME_IMG; ?>flower-left-bottom.png" alt="Home 1">
                 <div class="blockVertical"></div>
                 <div class="blockHorizontal position-absolute bottom-0 start-0"></div>
                 <img class="customSectionHero__img-right-bottom position-absolute end-0" src="<?php echo THEME_IMG; ?>img-right-bottom.png" alt="Home 1">
@@ -173,7 +173,7 @@ $placesCartagena = [
                     <div class="bg-yellow-200 p-xl-5 py-5 px-3 mb-5 -mt-n7 text-center">
                         <img class="w-auto mb-5 d-none d-xl-block mx-auto" src="<?php echo THEME_IMG; ?>text-celebrate.svg" alt="Home 1">
                         <img class="w-auto mb-xl-5 mb-4 d-block d-xl-none mx-auto" src="<?php echo THEME_IMG; ?>text-celebrate-mobile.svg" alt="Home 1">
-                        <div id="mi-countdown" data-countdown="2025-06-25 00:00:00"></div>
+                        <div id="mi-countdown" data-countdown="2025-12-13 14:00:00"></div>
                     </div>
                 </div>
                 <?php for ($i = 0; $i < 3; $i++) { ?>
@@ -262,7 +262,7 @@ $placesCartagena = [
                                     <?php if (count($placesCartagena) > 0) { ?>
                                         <?php foreach ($placesCartagena as $place) { ?>
                                             <div class="swiper-slide">
-                                                <div class="bg-yellow-200 p-3">
+                                                <div class="bg-yellow-200 p-3 pb-5">
                                                     <img class="w-100" src="<?php echo THEME_IMG; ?>places-cartagena/<?php echo $place["img"]; ?>" alt="Home 1">
                                                     <p class="fs-xl-3-small fs-4 text-primary letter-spacing-xl-1 letter-spacing-1 mt-3 text-uppercase"><?php echo $place["name"]; ?></p>
                                                     <span class="line line--small line--left my-3"></span>
@@ -282,7 +282,7 @@ $placesCartagena = [
         </div>
     </section>
 
-    <section class="customSectionRsvp position-relative py-5 -mt-n8">
+    <section class="customSectionRsvp position-relative py-5 -mt-n8" id="rsvp">
         <img class="w-100 h-100 object-fit-cover position-absolute top-0 start-0" src="<?php echo THEME_IMG; ?>bckg-countdown.png" alt="Home 1">
         <img class="flowerTopLeft position-absolute start-0" src="<?php echo THEME_IMG; ?>flower-top-left.webp" alt="Home 1">
         <div class="col-12 col-lg-8 mx-auto px-xl-0 px-3">

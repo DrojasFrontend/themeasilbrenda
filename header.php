@@ -47,7 +47,7 @@
                 <img class="d-block" width="58" height="78" src="<?php echo THEME_IMG; ?>/logo.png" alt="Logo">
               </a></li>
               <li class="d-flex justify-content-center align-items-center"><a class="fs-xl-4 text-primary" href="">REGISTRY</a></li>
-              <li class="d-flex justify-content-center align-items-center"><a class="fs-xl-4 text-primary" href="">R.S.V.P.</a></li>
+              <li class="d-flex justify-content-center align-items-center"><a class="fs-xl-4 text-primary" href="/#rsvp">R.S.V.P.</a></li>
             </ul>
           </div>
           <div class="col-4 d-flex justify-content-end align-items-center d-xl-none">
@@ -74,7 +74,7 @@
             <img class="d-block mx-auto" width="58" height="78" src="<?php echo THEME_IMG; ?>/logo.png" alt="Logo">
           </a></li>
           <li class="d-flex justify-content-center align-items-center"><a class="fs-xl-4 text-primary" href="">REGISTRY</a></li>
-          <li class="d-flex justify-content-center align-items-center"><a class="fs-xl-4 text-primary" href="">R.S.V.P.</a></li>
+          <li class="d-flex justify-content-center align-items-center"><a class="fs-xl-4 text-primary" href="/#rsvp">R.S.V.P.</a></li>
         </ul>
       </div>
     </div>

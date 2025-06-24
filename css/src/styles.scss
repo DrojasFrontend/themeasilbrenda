@@ -169,6 +169,7 @@ strong {
 :root {
     --bs-primary: #767A61;
     --bs-primary-100: #C5C9B0;
+    --bs-primary-200: #849573;
     --bs-white-100: #FFFFFF;
     --bs-black-100: #4D4D4D;
     --bs-yellow: #faf7ec;
@@ -197,6 +198,10 @@ strong {
 
 .text-primary-100 {
     color: var(--bs-primary-100) !important;
+}
+
+.text-primary-200 {
+    color: var(--bs-primary-200) !important;
 }
 
 .text-white {
@@ -241,6 +246,10 @@ strong {
 
 .bg-primary-100 {
     background-color: var(--bs-primary-100) !important;
+}
+
+.bg-primary-200 {
+    background-color: var(--bs-primary-200) !important;
 }
 
 .bg-white-100 {
@@ -378,7 +387,8 @@ strong {
                     bottom: -70px;
 
                     @media only screen and (min-width: 1200px) {
-                        bottom: 0;
+                        bottom: -130px;
+                        width: auto;
                     }
                 }
             }
