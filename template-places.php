@@ -444,14 +444,6 @@ $places = [
               "image" => THEME_IMG . 'places-cartagena/boutiques-6.webp',
           ],
           [
-              "name" => "Goretty Medina",
-              "address" => "Calle La Mantilla # 3 - 44",
-              "city" => "Centro Histórico, Cartagena",
-              "phone" => "57 317 4368144",
-              "link" => "https://co.gorettymedinac.com",
-              "image" => THEME_IMG . 'places-cartagena/boutiques-7.webp',
-          ],
-          [
               "name" => "Ketty Tinoco",
               "address" => "Calle Balocco # 33 - 01",
               "city" => "Centro Histórico, Cartagena",
@@ -560,6 +552,37 @@ $places = [
                     <div class="customSectionPlaces__radius bg-yellow-300 pt-xl-5 text-center">
                         <div class="my-5">
                             <img class="textPlaces mb-xl-5 mb-3" src="<?php echo THEME_IMG; ?>text-places.svg" alt="Home 1">
+
+                            <div class="px-xl-5 px-3 pb-5">
+                                <li class="d-flex justify-content-between align-items-center py-3 px-xl-5 px-2" id="travel">
+                                    <a class="fs-xl-3 text-primary" href="#">TRAVEL INFO</a>
+                                    <span><img class="icono d-block" src="<?php echo THEME_IMG; ?>icon-travel.svg" alt="Home 1"></span>
+                                </li>
+                                <div class="pt-4">
+                                    <p class="fs-xl-5-medium fs-5 fs-5 text-primary text-start px-xl-4 mb-1">PASSPORTS</p>
+                                    <p class="fs-xl-6-medium fs-5 fs-5 text-black text-start px-xl-4 mb-3">
+                                        Don't forget your passports! Please double check the expiration date.
+                                    </p>
+                                    <p class="fs-xl-5-medium fs-5 fs-5 text-primary text-start px-xl-4 mb-1">CHECKMIC</p>
+                                    <p class="fs-xl-6-medium fs-5 fs-5 text-black text-start px-xl-4 mb-3">Please complete the immigration registration form 48 hours before your trip, as the airline requires proof of completion to check-in. Complete the same step to return to the US. <a href="https://www.checkmigrant.com/es/colombia" target="_blank" style="text-decoration: underline">Click Here</a></p>
+                                    
+                                    <p class="fs-xl-5-medium fs-5 fs-5 text-primary text-start px-xl-4 mb-1">RAFAEL NUÑEZ - INTERNATIONAL AIRPORT</p>
+                                    <p class="fs-xl-6-medium fs-5 fs-5 text-black text-start px-xl-4 mb-3">Flight to Cartagena on the Caribbean coast. Latam, Delta, American Airlines, United, Copa Airlines and Avianca operate direct flights to the Rafael Nuñez Airport. The airport is a short 10-minutes taxi journey to the old town. There are authorized taxi services 24 hours. The rate to Getsemaní costs about $14.000 cop. To the hotel zone of the Historic Center (Ciudad Amurallada) about $18.000 cop and to the Bocagrande zone it costs $30.000 cop. Normally $1 USD is equivalent to $4.000 cop.</p>
+                                    
+                                    <p class="fs-xl-5-medium fs-5 fs-5 text-primary text-start px-xl-4 mb-1">SECURITY IN CARTAGENA</p>
+                                    <p class="fs-xl-6-medium fs-5 fs-5 text-black text-start px-xl-4 mb-3">Cartagena is a beautiful and safe destination for our celebration. The city is known for its welcoming atmosphere, and we want you to feel at ease as you join us for this special occasion. With a strong focus on tourism and hospitality, Cartagena offers a secure environment for all visitors. From the historic streets to the scenic beaches, we’re excited to share this incredible city with you, and we’re confident you'll feel right at home!</p>
+                                    
+                                    <p class="fs-xl-5-medium fs-5 fs-5 text-primary text-start px-xl-4 mb-1">CARTAGENANNY</p>
+                                    <p class="fs-xl-6-medium fs-5 fs-5 text-black text-start px-xl-4">For guests who may require it, here’s a trusted local nanny service to help with childcare. Please feel free to reach out to arrange childcare during the celebration. Special rates are available using the code MARYCUETER.</p>
+                                    <p class="fs-xl-6-medium fs-5 fs-5 text-black text-start px-xl-4">Special rates are available using the code MARYCUETER.</p>
+                                    <p class="fs-xl-6-medium fs-5 fs-5 text-black text-start px-xl-4 mb-5">Lili Rueda: <a href="tel:+573186294974" target="_blank" style="text-decoration: underline">+57 318 6294974</a></p>
+                                </div>
+                            </div>
+
+                            <!-- Block -->
+                            <div class="customBckgBlock mb-5"></div>
+                            <!-- End Block -->
+
                             <div class="px-xl-5 px-3">
                                 <li class="d-flex justify-content-between align-items-center py-3 px-xl-5 px-2" id="hotels">
                                     <a class="fs-xl-3 text-primary" href="#">HOTELS</a>

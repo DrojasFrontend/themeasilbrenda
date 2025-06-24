@@ -188,6 +188,14 @@ strong {
     --bs-modal-width: 750px;
 }
 
+.font-base {
+    font-family: var(--bs-font-family-base) !important;
+}
+
+.font-secondary {
+    font-family: var(--bs-font-family-secondary) !important;
+}
+
 .font-secondary {
     font-family: var(--bs-font-family-secondary) !important;
 }

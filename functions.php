@@ -26,3 +26,4 @@ function define_sitemap_constant() {
   define('SITEMAP', get_bloginfo('name'));
 }
 add_action('after_setup_theme', 'define_sitemap_constant');
+

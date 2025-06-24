@@ -46,7 +46,7 @@
               <li class="d-flex justify-content-center align-items-center"><a class="fs-xl-4 text-primary" href="/">
                 <img class="d-block" width="58" height="78" src="<?php echo THEME_IMG; ?>/logo.png" alt="Logo">
               </a></li>
-              <li class="d-flex justify-content-center align-items-center"><a class="fs-xl-4 text-primary" href="">REGISTRY</a></li>
+              <li class="d-flex justify-content-center align-items-center"><a class="fs-xl-4 text-primary" href="https://www.zola.com/registry/asilandbrenda" target="_blank">REGISTRY</a></li>
               <li class="d-flex justify-content-center align-items-center"><a class="fs-xl-4 text-primary" href="/#rsvp">R.S.V.P.</a></li>
             </ul>
           </div>
@@ -73,13 +73,13 @@
           <li class="d-flex justify-content-center align-items-center"><a class="fs-xl-4 text-primary" href="/">
             <img class="d-block mx-auto" width="58" height="78" src="<?php echo THEME_IMG; ?>/logo.png" alt="Logo">
           </a></li>
-          <li class="d-flex justify-content-center align-items-center"><a class="fs-xl-4 text-primary" href="">REGISTRY</a></li>
+          <li class="d-flex justify-content-center align-items-center"><a class="fs-xl-4 text-primary" href="https://www.zola.com/registry/asilandbrenda" target="_blank">REGISTRY</a></li>
           <li class="d-flex justify-content-center align-items-center"><a class="fs-xl-4 text-primary" href="/#rsvp">R.S.V.P.</a></li>
         </ul>
       </div>
     </div>
   </section>
 
-  <!-- Whatsapp -->
-  <?php mostrar_boton_whatsapp(); ?>
-  <!-- Fin Whatsapp -->
+  <!-- Modal de Login -->
+  <?php get_template_part('template-parts/login-modal'); ?>
+  <!-- Fin Modal de Login -->

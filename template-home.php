@@ -179,7 +179,7 @@ $placesCartagena = [
                 <?php for ($i = 0; $i < 3; $i++) { ?>
                     <div class="col-12 col-lg-4 <?php echo ($i == 0) ? "d-block mx-auto" : "d-none d-xl-block"; ?>">
                         <div class="bg-yellow-200 p-3">
-                            <img class="w-100" src="<?php echo THEME_IMG; ?>gallery-<?php echo $i + 1; ?>.png" alt="Home 1">
+                            <img class="w-100" src="<?php echo THEME_IMG; ?>gallery-<?php echo $i + 1; ?>.webp" alt="Home 1">
                         </div>
                     </div>
                 <?php } ?>
@@ -204,17 +204,21 @@ $placesCartagena = [
                         <div class="p-xl-5 p-4 pb-0" id="cartagena">
                             <img class="textCartagena my-5 d-none d-xl-block mx-auto" src="<?php echo THEME_IMG; ?>text-cartagena.svg" alt="Home 1">
                             <img class="textCartagena my-xl-5 mt-0 mb-4 d-block d-xl-none mx-auto" src="<?php echo THEME_IMG; ?>text-cartagena-mobile.svg" alt="Home 1">
-                            <p class="fs-xl-4 fs-6 text-black mb-4 px-xl-3 px-lg-5 letter-spacing-xl-1 letter-spacing-06 line-xl-height-30 line-height-20">
+                            <p class="fs-xl-4 fs-6 text-black mb-4 px-lg-5 letter-spacing-xl-1 letter-spacing-06 line-xl-height-30 line-height-20">
                             We are very excited to have our wedding in Cartagena. A city full of magic, charm, history and tradition, which is characterized by its great wall, cobblestone streets and beautiful colonial houses. Cartagena is a UNESCO World Heritage Site and is considered one of the greatest cultural treasures of Latin America.
                             </p>
-                            <p class="fs-xl-4 fs-6 text-black px-xl-3 px-lg-5 letter-spacing-xl-1 letter-spacing-06 line-xl-height-30 line-height-20">
-                            We would like to make some recommendations, so that you can enjoy your stay in this wonderful place to the fullest. The best way to experience Cartagena is to walk and explore its labyrinths of narrow streets and lush squares. Ideally, you should stay in the historic district, so that you can be within walking distance of places of interest and experience live music, excellent gastronomy and popular art.
+                            <p class="fs-xl-4 fs-6 text-black px-lg-5 letter-spacing-xl-1 letter-spacing-06 line-xl-height-30 line-height-20">
+                            We would like to make some recommendations, so that you can enjoy your stay in this wonderful place to the fullest. The best way to experience Cartagena is to walk and explore it's labyrinths of narrow streets and lush squares. Ideally, you should stay in the historic district, so that you can be within walking distance of places of interest and experience live music, excellent gastronomy and popular art.
                             </p>
                         </div>
 
                         <div class="my-5 pb-5">
                             <p class="fs-xl-2-medium fs-4 text-primary letter-spacing-xl-9 letter-spacing-36 mb-4">PLACES TO INTEREST</p>
                             <ul class="px-4">
+                                <li class="d-flex justify-content-between align-items-center py-xl-3 px-xl-4 py-2 px-2 clickeable">
+                                    <a class="fs-xl-3 fs-5 text-primary letter-spacing-xl-3 letter-spacing-15" href="/places/#travel">TRAVEL INFO</a>
+                                    <span class="icono"><img class="d-block" src="<?php echo THEME_IMG; ?>icon-travel.svg" alt="Home 1"></span>
+                                </li>
                                 <li class="d-flex justify-content-between align-items-center py-xl-3 px-xl-4 py-2 px-2 clickeable">
                                     <a class="fs-xl-3 fs-5 text-primary letter-spacing-xl-3 letter-spacing-15" href="/places/#hotels">HOTELS</a>
                                     <span class="icono"><img class="d-block" src="<?php echo THEME_IMG; ?>icon-hotel.svg" alt="Home 1"></span>
@@ -440,7 +444,7 @@ $placesCartagena = [
                     <p class="text-black letter-spacing-xl-15 mb-2">SUNKISSED SOIRÉE</p>
                     <p class="text-black letter-spacing-xl-15 mb-1">Men: Dressy pants and Button up shirt</p>
                     <p class="text-black letter-spacing-xl-15 mb-4">Women: Flowy dress - vibrant colors - </p>
-                    <img class="w-100 d-block" src="<?php echo THEME_IMG; ?>cocktail-casual-example-1.png" alt="Home 1">
+                    <img class="w-100 d-block" src="<?php echo THEME_IMG; ?>cocktail-casual-example-1.webp" alt="Home 1">
                     <img class="w-100 d-block" src="<?php echo THEME_IMG; ?>cocktail-casual-example-2.png" alt="Home 1">
                     <p class="fs-xl-6-small fs-5 text-black letter-spacing-xl-15 mt-4 px-xl-5 px-3" style="font-style: italic;">
                         Embrace the warm glow of Cartagena with casual cocktail attire with light fabrics like linen. Think vibrant dresses and smart casual looks that capture the essence of a joyful gathering under the twilight.

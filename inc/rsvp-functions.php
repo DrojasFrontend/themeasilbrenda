@@ -31,10 +31,10 @@ function sendAdminEmail($guest_name, $guests, $allergies, $email) {
     
     // Generar lista detallada por evento
     $event_names = [
-        'ceremony' => 'CEREMONY (Dec 13th, 5:00 PM)',
-        'reception' => 'RECEPTION (Dec 13th, Following ceremony)',
-        'welcome' => 'WELCOME PARTY (Dec 12th, 6:00 PM)',
-        'brunch' => 'FAREWELL BRUNCH (Dec 14th, 10:00 AM - 2:00 PM)'
+        'ceremony' => 'CEREMONIA (13 de Diciembre, 5:00 PM)',
+        'reception' => 'RECEPCIÓN (13 de Diciembre, Después de la ceremonia)',
+        'welcome' => 'FIESTA DE BIENVENIDA (12 de Diciembre, 6:00 PM)',
+        'brunch' => 'BRUNCH DE DESPEDIDA (14 de Diciembre, 10:00 AM - 2:00 PM)'
     ];
     
     $total_accepts = 0;
@@ -172,41 +172,41 @@ function sendGuestEmail($guest_name, $email) {
                 
                 <div class="events-container">
                     <div class="event">
-                        <div class="event-title">💒 CEREMONY</div>
+                        <div class="event-title">💒 CEREMONIA</div>
                         <div class="event-details">
-                            <strong>Fecha:</strong> December 13th, 2025<br>
+                            <strong>Fecha:</strong> 13 de Diciembre, 2025<br>
                             <strong>Hora:</strong> 5:00 P.M.<br>
                             <strong>Lugar:</strong> Baluarte San Francisco Javier<br>
-                            <strong>Dress Code:</strong> Black Tie (Tropical Elegance)
+                            <strong>Código de Vestimenta:</strong> Etiqueta (Elegancia Tropical)
                         </div>
                     </div>
                     
                     <div class="event">
-                        <div class="event-title">🎉 RECEPTION</div>
+                        <div class="event-title">🎉 RECEPCIÓN</div>
                         <div class="event-details">
-                            <strong>Fecha:</strong> December 13th, 2025<br>
-                            <strong>Hora:</strong> Following the ceremony<br>
-                            <strong>Lugar:</strong> Sofitel Legend Santa Clara - Ballroom
+                            <strong>Fecha:</strong> 13 de Diciembre, 2025<br>
+                            <strong>Hora:</strong> Después de la ceremonia<br>
+                            <strong>Lugar:</strong> Sofitel Legend Santa Clara - Salón de Baile
                         </div>
                     </div>
                     
                     <div class="event">
-                        <div class="event-title">🍸 WELCOME PARTY</div>
+                        <div class="event-title">🍸 FIESTA DE BIENVENIDA</div>
                         <div class="event-details">
-                            <strong>Fecha:</strong> December 12th, 2025<br>
+                            <strong>Fecha:</strong> 12 de Diciembre, 2025<br>
                             <strong>Hora:</strong> 6:00 P.M.<br>
-                            <strong>Lugar:</strong> Sofitel Legend Santa Clara - SPA TERRACE<br>
-                            <strong>Dress Code:</strong> Cocktail Casual (Sunkissed Soirée)
+                            <strong>Lugar:</strong> Sofitel Legend Santa Clara - TERRAZA DEL SPA<br>
+                            <strong>Código de Vestimenta:</strong> Cóctel Casual (Soirée Dorada)
                         </div>
                     </div>
                     
                     <div class="event">
-                        <div class="event-title">🥐 FAREWELL BRUNCH</div>
+                        <div class="event-title">🥐 BRUNCH DE DESPEDIDA</div>
                         <div class="event-details">
-                            <strong>Fecha:</strong> December 14th, 2025<br>
+                            <strong>Fecha:</strong> 14 de Diciembre, 2025<br>
                             <strong>Hora:</strong> 10:00 A.M. - 2:00 P.M.<br>
-                            <strong>Lugar:</strong> Sofitel Legend Santa Clara - RESTAURANT 1621<br>
-                            <strong>Dress Code:</strong> Casual Attire
+                            <strong>Lugar:</strong> Sofitel Legend Santa Clara - RESTAURANTE 1621<br>
+                            <strong>Código de Vestimenta:</strong> Casual
                         </div>
                     </div>
                 </div>
@@ -223,7 +223,7 @@ function sendGuestEmail($guest_name, $email) {
                 <p>Con amor,</p>
                 <p><strong>Asil & Brenda</strong></p>
                 <div style="margin-top: 20px; padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.3);">
-                    <p style="font-size: 12px;">December 13th, 2025 • Cartagena de Indias, Colombia</p>
+                    <p style="font-size: 12px;">13 de Diciembre, 2025 • Cartagena de Indias, Colombia</p>
                     <p style="font-size: 12px;">Este es un mensaje automático de confirmación</p>
                 </div>
             </div>
