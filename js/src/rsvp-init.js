@@ -426,7 +426,7 @@ function findInvitation() {
         ).join('');
         searchResults.style.display = 'block';
     } else {
-        searchResults.innerHTML = '<div class="rsvp-search-item">No se encontraron coincidencias</div>';
+        searchResults.innerHTML = '<div class="rsvp-search-item">No results found</div>';
         searchResults.style.display = 'block';
     }
 }
