@@ -494,7 +494,7 @@ $placesCartagena = [
                         </p>
                         <input type="text" id="guest-search" class="w-100 border-1 bg-white-100 p-3 mb-3 font-secondary" placeholder="Full name" autocomplete="off">
                         <div id="search-results" class="rsvp-search-item fs-4 font-secondary py-3 cursor-pointer"></div>
-                        <button type="button" class="btn btn-secondary w-100 border-0 fs-xl-5-medium fs-6" onclick="openRSVPForm()">FIND YOUR INVITATION</button>
+                        <button type="button" class="btn btn-secondary rsvp-find-btn w-100 border-0 fs-xl-5-medium fs-6">FIND YOUR INVITATION</button>
                     </div>
 
                     <!-- Paso 2: CEREMONY -->

@@ -218,10 +218,8 @@ export function initRSVPForm() {
         console.warn('⚠️ Botón de cerrar no encontrado');
     }
     
-    // Búsqueda en tiempo real
-    if (searchInput) {
-        searchInput.addEventListener('input', searchGuests);
-    }
+    // Búsqueda solo con botón (sin búsqueda automática)
+    // Removed automatic search listeners
     
 }
 
@@ -258,6 +256,11 @@ function setupRSVPEventListeners() {
         // Botón anterior
         if (e.target.matches('.rsvp-back-btn')) {
             previousStep();
+        }
+        
+        // Botón buscar invitación
+        if (e.target.matches('.rsvp-find-btn')) {
+            findInvitation();
         }
     });
 }
@@ -361,7 +364,7 @@ function searchGuests() {
     const query = searchInput.value.toLowerCase().trim();
     
     
-    if (query.length < 3) {
+    if (query.length < 1) {
         searchResults.style.display = 'none';
         return;
     }
@@ -386,6 +389,36 @@ function searchGuests() {
     // Combinar resultados por prioridad y limitar a 8 resultados máximo
     const matches = [...exactMatches, ...startsWithMatches, ...containsMatches].slice(0, 8);
     
+    
+    if (matches.length > 0) {
+        searchResults.innerHTML = matches.map(name => 
+            `<div class="rsvp-search-item cursor-pointer" onclick="selectGuest('${name}')">${name}</div>`
+        ).join('');
+        searchResults.style.display = 'block';
+    } else {
+        searchResults.innerHTML = '<div class="rsvp-search-item">No se encontraron coincidencias</div>';
+        searchResults.style.display = 'block';
+    }
+}
+
+// Función para buscar invitación desde el botón
+function findInvitation() {
+    const searchInput = document.getElementById('guest-search');
+    const searchResults = document.getElementById('search-results');
+    const inputValue = searchInput.value.trim();
+    
+    if (!inputValue) {
+        alert('Por favor escribe tu nombre completo');
+        return;
+    }
+    
+    const query = inputValue.toLowerCase();
+    const allGuests = Object.keys(invitedGuests);
+    
+    // Solo buscar coincidencias exactas del nombre completo
+    const matches = allGuests.filter(name => 
+        name.toLowerCase() === query
+    );
     
     if (matches.length > 0) {
         searchResults.innerHTML = matches.map(name => 
