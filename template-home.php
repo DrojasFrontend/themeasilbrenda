@@ -132,7 +132,7 @@ $placesCartagena = [
                                 <div class="text-center mt-4 mb-xl-5 pb-xl-5 pb-3">
                                     <p class="fs-xl-5 fs-5 text-black letter-spacing-xl-36 letter-spacing-3 mb-3">DRESS CODE</p>
                                     <button class="btn btn-primary border-2 mx-auto" type="button" data-bs-toggle="modal" data-bs-target="#cocktailCasual">
-                                        COCKTAIL CASUAL
+                                        COCKTAIL ATTIRE
                                     </button>
                                 </div>
                             </div>
@@ -149,7 +149,7 @@ $placesCartagena = [
                                 <div class="text-center mt-4 mb-xl-5 mb-3 pb-xl-5">
                                     <p class="fs-xl-5 fs-5 text-black letter-spacing-xl-36 letter-spacing-3 mb-3">DRESS CODE</p>
                                     <button class="btn btn-primary border-2 mx-auto" type="button" data-bs-toggle="modal" data-bs-target="#casualAttire">
-                                        CASUAL ATTIRE
+                                        COCKTAIL ATTIRE
                                     </button>
                                 </div>
                             </div>
@@ -467,7 +467,7 @@ $placesCartagena = [
                     <img class="w-100 position-absolute top-0 start-0 object-fit-cover" src="<?php echo THEME_IMG; ?>edit-verde-acuarela.png" alt="Home 1">
                     <div class="position-relative">
                         <img class="" src="<?php echo THEME_IMG; ?>casual-attire.png" alt="Home 1">
-                        <p class="letter-spacing-15 text-primary mt-4">CASUAL ATTIRE</p>
+                        <p class="letter-spacing-15 text-primary mt-4">COCKTAIL ATTIRE</p>
                     </div>
                 </div>
             </div>

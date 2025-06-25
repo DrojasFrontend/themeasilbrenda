@@ -364,7 +364,7 @@ function searchGuests() {
     const query = searchInput.value.toLowerCase().trim();
     
     
-    if (query.length < 1) {
+    if (query.length < 3) {
         searchResults.style.display = 'none';
         return;
     }
@@ -407,18 +407,31 @@ function findInvitation() {
     const searchResults = document.getElementById('search-results');
     const inputValue = searchInput.value.trim();
     
-    if (!inputValue) {
-        alert('Please enter your full name');
+    if (inputValue.length < 3) {
+        alert('Please enter at least 3 characters');
         return;
     }
     
     const query = inputValue.toLowerCase();
     const allGuests = Object.keys(invitedGuests);
     
-    // Solo buscar coincidencias exactas del nombre completo
-    const matches = allGuests.filter(name => 
+    // Separar coincidencias exactas, que empiezan con la query, y que contienen la query
+    const exactMatches = allGuests.filter(name => 
         name.toLowerCase() === query
     );
+    
+    const startsWithMatches = allGuests.filter(name => 
+        name.toLowerCase().startsWith(query) && !exactMatches.includes(name)
+    );
+    
+    const containsMatches = allGuests.filter(name => 
+        name.toLowerCase().includes(query) && 
+        !exactMatches.includes(name) && 
+        !startsWithMatches.includes(name)
+    );
+    
+    // Combinar resultados por prioridad y limitar a 8 resultados máximo
+    const matches = [...exactMatches, ...startsWithMatches, ...containsMatches].slice(0, 8);
     
     if (matches.length > 0) {
         searchResults.innerHTML = matches.map(name => 
