@@ -361,14 +361,30 @@ function searchGuests() {
     const query = searchInput.value.toLowerCase().trim();
     
     
-    if (query.length < 2) {
+    if (query.length < 3) {
         searchResults.style.display = 'none';
         return;
     }
     
-    const matches = Object.keys(invitedGuests).filter(name => 
-        name.toLowerCase().includes(query)
+    const allGuests = Object.keys(invitedGuests);
+    
+    // Separar coincidencias exactas, que empiezan con la query, y que contienen la query
+    const exactMatches = allGuests.filter(name => 
+        name.toLowerCase() === query
     );
+    
+    const startsWithMatches = allGuests.filter(name => 
+        name.toLowerCase().startsWith(query) && !exactMatches.includes(name)
+    );
+    
+    const containsMatches = allGuests.filter(name => 
+        name.toLowerCase().includes(query) && 
+        !exactMatches.includes(name) && 
+        !startsWithMatches.includes(name)
+    );
+    
+    // Combinar resultados por prioridad y limitar a 8 resultados máximo
+    const matches = [...exactMatches, ...startsWithMatches, ...containsMatches].slice(0, 8);
     
     
     if (matches.length > 0) {
