@@ -396,7 +396,7 @@ function searchGuests() {
         ).join('');
         searchResults.style.display = 'block';
     } else {
-        searchResults.innerHTML = '<div class="rsvp-search-item">No se encontraron coincidencias</div>';
+        searchResults.innerHTML = '<div class="rsvp-search-item">No results found</div>';
         searchResults.style.display = 'block';
     }
 }
@@ -408,7 +408,7 @@ function findInvitation() {
     const inputValue = searchInput.value.trim();
     
     if (!inputValue) {
-        alert('Por favor escribe tu nombre completo');
+        alert('Please enter your full name');
         return;
     }
     
