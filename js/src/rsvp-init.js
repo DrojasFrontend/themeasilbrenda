@@ -218,8 +218,10 @@ export function initRSVPForm() {
         console.warn('⚠️ Botón de cerrar no encontrado');
     }
     
-    // Búsqueda solo con botón (sin búsqueda automática)
-    // Removed automatic search listeners
+    // Búsqueda automática al escribir
+    if (searchInput) {
+        searchInput.addEventListener('input', searchGuests);
+    }
     
 }
 
@@ -258,10 +260,10 @@ function setupRSVPEventListeners() {
             previousStep();
         }
         
-        // Botón buscar invitación
-        if (e.target.matches('.rsvp-find-btn')) {
-            findInvitation();
-        }
+        // Botón buscar invitación (desactivado - ahora busca automáticamente)
+        // if (e.target.matches('.rsvp-find-btn')) {
+        //     findInvitation();
+        // }
     });
 }
 
@@ -386,8 +388,8 @@ function searchGuests() {
         !startsWithMatches.includes(name)
     );
     
-    // Combinar resultados por prioridad y limitar a 8 resultados máximo
-    const matches = [...exactMatches, ...startsWithMatches, ...containsMatches].slice(0, 8);
+    // Combinar resultados por prioridad y limitar a 4 resultados máximo (solo los más cercanos)
+    const matches = [...exactMatches, ...startsWithMatches, ...containsMatches].slice(0, 4);
     
     
     if (matches.length > 0) {

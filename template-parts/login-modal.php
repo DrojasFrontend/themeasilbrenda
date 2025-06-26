@@ -74,12 +74,9 @@ body.modal-open {
     flex-direction: column;
     width: 100%;
     pointer-events: auto;
-    background-color: #fff;
     background-clip: padding-box;
-    border: 1px solid rgba(0,0,0,.2);
     border-radius: 15px;
     outline: 0;
-    box-shadow: 0 20px 60px rgba(0,0,0,0.3);
 }
 .modal-header {
     display: flex;
