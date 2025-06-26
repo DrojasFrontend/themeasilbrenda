@@ -368,22 +368,47 @@ function searchGuests() {
         return;
     }
     
-    const allGuests = Object.keys(invitedGuests);
+    const allMainGuests = Object.keys(invitedGuests);
+    let foundMainGuests = new Set(); // Para evitar duplicados
     
-    // Separar coincidencias exactas, que empiezan con la query, y que contienen la query
-    const exactMatches = allGuests.filter(name => 
-        name.toLowerCase() === query
-    );
+    // Buscar en nombres principales
+    const exactMatches = allMainGuests.filter(name => {
+        if (name.toLowerCase() === query) {
+            foundMainGuests.add(name);
+            return true;
+        }
+        return false;
+    });
     
-    const startsWithMatches = allGuests.filter(name => 
-        name.toLowerCase().startsWith(query) && !exactMatches.includes(name)
-    );
+    const startsWithMatches = allMainGuests.filter(name => {
+        if (name.toLowerCase().startsWith(query) && !foundMainGuests.has(name)) {
+            foundMainGuests.add(name);
+            return true;
+        }
+        return false;
+    });
     
-    const containsMatches = allGuests.filter(name => 
-        name.toLowerCase().includes(query) && 
-        !exactMatches.includes(name) && 
-        !startsWithMatches.includes(name)
-    );
+    const containsMatches = allMainGuests.filter(name => {
+        if (name.toLowerCase().includes(query) && !foundMainGuests.has(name)) {
+            foundMainGuests.add(name);
+            return true;
+        }
+        return false;
+    });
+    
+    // Buscar también en la lista de invitados de cada grupo
+    allMainGuests.forEach(mainGuest => {
+        if (!foundMainGuests.has(mainGuest)) {
+            const guestList = invitedGuests[mainGuest];
+            const hasMatchingGuest = guestList.some(guest => 
+                guest.toLowerCase().includes(query)
+            );
+            if (hasMatchingGuest) {
+                foundMainGuests.add(mainGuest);
+                containsMatches.push(mainGuest);
+            }
+        }
+    });
     
     // Combinar resultados por prioridad y limitar a 4 resultados máximo (solo los más cercanos)
     const matches = [...exactMatches, ...startsWithMatches, ...containsMatches].slice(0, 4);

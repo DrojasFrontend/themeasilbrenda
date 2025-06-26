@@ -196,7 +196,7 @@ function sendGuestEmail($guest_name, $email) {
                             <strong>Date:</strong> December 12th, 2025<br>
                             <strong>Time:</strong> 6:00 P.M.<br>
                             <strong>Location:</strong> Sofitel Legend Santa Clara - Spa Terrace<br>
-                            <strong>Dress Code:</strong> Cocktail Casual
+                            <strong>Dress Code:</strong> Cocktail Attire 
                         </div>
                     </div>
                     
@@ -206,7 +206,7 @@ function sendGuestEmail($guest_name, $email) {
                             <strong>Date:</strong> December 14th, 2025<br>
                             <strong>Time:</strong> 10:00 A.M. - 2:00 P.M.<br>
                             <strong>Location:</strong> Sofitel Legend Santa Clara - Restaurant 1621<br>
-                            <strong>Dress Code:</strong> Cocktail Attire
+                            <strong>Dress Code:</strong> Casual Attire
                         </div>
                     </div>
                 </div>
