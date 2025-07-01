@@ -420,7 +420,7 @@ $placesCartagena = [
                 <div class="modal-body bg-white-100 text-center position-relative">
                     <img class="w-100 position-absolute top-0 start-0 object-fit-cover" src="<?php echo THEME_IMG; ?>edit-verde-acuarela.png" alt="Home 1">
                     <div class="position-relative">
-                        <img class="" src="<?php echo THEME_IMG; ?>Casual-Attire-new.png" alt="Home 1">
+                        <img class="" src="<?php echo THEME_IMG; ?>cocktail-casual.png" alt="Home 1">
                         <p class="letter-spacing-15 text-primary mb-4">COCKTAIL CASUAL</p>
                         <button class="btn btn-primary border-2 mx-auto" type="button" data-bs-toggle="modal" data-bs-target="#cocktailCasualExamples">
                             VIEW MORE EXAMPLES
