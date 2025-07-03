@@ -447,7 +447,7 @@ $placesCartagena = [
                     <img class="w-100 d-block" src="<?php echo THEME_IMG; ?>cocktail-casual-example-1.webp" alt="Home 1">
                     <img class="w-100 d-block" src="<?php echo THEME_IMG; ?>cocktail-casual-example-2.png" alt="Home 1">
                     <p class="fs-xl-6-small fs-5 text-black letter-spacing-xl-15 mt-4 px-xl-5 px-3" style="font-style: italic;">
-                        Embrace the warm glow of Cartagena with casual cocktail attire with light fabrics like linen. Think vibrant dresses and smart casual looks that capture the essence of a joyful gathering under the twilight.
+                        Embrace the warm glow of Cartagena with cocktail attire with light fabrics like linen. Think vibrant dresses and smart casual looks that capture the essence of a joyful gathering under the twilight.
                     </p>
                 </div>
             </div>
