@@ -160,7 +160,7 @@ document.addEventListener('DOMContentLoaded', function() {
         errorAlert.classList.add('d-none');
         
         // Validar contraseña (súper simple)
-        if (password === 'Cartagena2025') {
+        if (password === 'CARTAGENA2025') {
             // Guardar en localStorage
             localStorage.setItem('site_access', 'granted');
             
