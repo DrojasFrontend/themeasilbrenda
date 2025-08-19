@@ -240,6 +240,109 @@ function sendGuestEmail($guest_name, $email) {
 }
 
 /**
+ * Función para verificar si todos los invitados declinan todos los eventos
+ */
+function checkIfAllDecline($guests) {
+    $events = ['ceremony', 'reception', 'welcome', 'brunch'];
+    
+    // Contar total de respuestas decline y total de respuestas posibles
+    $total_declines = 0;
+    $total_responses = 0;
+    
+    foreach ($events as $event) {
+        if (isset($guests[$event])) {
+            foreach ($guests[$event] as $guest_name => $response) {
+                $total_responses++;
+                if ($response === 'decline') {
+                    $total_declines++;
+                }
+            }
+        }
+    }
+    
+    // Si hay respuestas y TODAS son decline, entonces todos declinaron todo
+    return $total_responses > 0 && $total_declines === $total_responses;
+}
+
+/**
+ * Function to send emotional email when all guests decline all events
+ */
+function sendDeclineEmail($guest_name, $email) {
+    $subject = '💔 We\'ll miss you - Asil & Brenda\'s Wedding';
+    
+    $message = '
+    <!DOCTYPE html>
+    <html>
+    <head>
+        <meta charset="UTF-8">
+        <style>
+            body { font-family: "Georgia", serif; line-height: 1.6; color: #333; margin: 0; padding: 0; background: #f5f5f5; }
+            .container { max-width: 600px; margin: 0 auto; background: white; }
+            .header { background: linear-gradient(135deg, #8B9467, #A5B375); color: white; padding: 40px 30px; text-align: center; }
+            .header h1 { margin: 0 0 10px 0; font-size: 28px; font-weight: normal; }
+            .header p { margin: 0; font-size: 16px; opacity: 0.9; }
+            .content { padding: 40px 30px; }
+            .greeting { font-size: 20px; color: #8B9467; margin-bottom: 20px; text-align: center; }
+            .message { font-size: 16px; line-height: 1.8; margin-bottom: 30px; text-align: center; }
+            .highlight { background: #f9f9f9; padding: 20px; border-left: 4px solid #8B9467; margin: 30px 0; font-style: italic; }
+            .footer { background: #8B9467; color: white; padding: 30px; text-align: center; }
+            .footer h3 { margin: 0 0 15px 0; font-size: 20px; }
+            .footer p { margin: 5px 0; font-size: 14px; opacity: 0.9; }
+            .divider { height: 2px; background: linear-gradient(to right, transparent, #8B9467, transparent); margin: 30px 0; }
+            .heart { color: #d63384; font-size: 20px; }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <div class="header">
+                <h1>💔 We\'ll miss you</h1>
+                <p>Asil & Brenda</p>
+            </div>
+            
+            <div class="content">
+                <div class="greeting">
+                    Dear ' . $guest_name . ',
+                </div>
+                
+                <div class="message">
+                    We have received your response and although we are sad that you won\'t be able to join us 
+                    on our special day, we completely understand.<br><br>
+                    Your friendship means so much to us and even though you won\'t be physically present, 
+                    you know you will have a special place in our hearts that day.
+                </div>
+                
+                <div class="highlight">
+                    <span class="heart">💕</span> "Distance cannot separate hearts that truly love" <span class="heart">💕</span>
+                </div>
+                
+                <div class="divider"></div>
+                
+                <div class="highlight">
+                    We love you and we\'re going to miss you so much! 🥺
+                </div>
+            </div>
+            
+            <div class="footer">
+                <h3>With all our love ❤️</h3>
+                <p><strong>Asil & Brenda</strong></p>
+                <div style="margin-top: 20px; padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.3);">
+                    <p style="font-size: 12px;">December 13th, 2025 • Cartagena de Indias, Colombia</p>
+                    <p style="font-size: 12px;">Even though you won\'t be present, you\'ll be in our hearts</p>
+                </div>
+            </div>
+        </div>
+    </body>
+    </html>';
+    
+    $headers = [
+        'From: rsvp@thekalkavans2025.com',
+        'Content-Type: text/html; charset=UTF-8'
+    ];
+    
+    return wp_mail($email, $subject, $message, $headers);
+}
+
+/**
  * Handle RSVP AJAX requests
  */
 function handle_rsvp_ajax() {
@@ -329,9 +432,20 @@ function handle_rsvp_ajax() {
                     'guests_count' => count($guests)
                 ], true));
                 
+                // Verificar si todos declinan todos los eventos
+                $all_declined = checkIfAllDecline($guests);
+                
                 // Send actual emails
                 $admin_sent = sendAdminEmail($guest_name, $guests, $allergies, $email);
-                $guest_sent = sendGuestEmail($guest_name, $email);
+                
+                // Enviar correo apropiado al invitado
+                if ($all_declined) {
+                    $guest_sent = sendDeclineEmail($guest_name, $email);
+                    error_log('📧 Correo de decline enviado a: ' . $guest_name);
+                } else {
+                    $guest_sent = sendGuestEmail($guest_name, $email);
+                    error_log('📧 Correo de confirmación enviado a: ' . $guest_name);
+                }
                 
                 // Response with email status
                 header('Content-Type: application/json');
@@ -342,6 +456,8 @@ function handle_rsvp_ajax() {
                         'guest_name' => $guest_name,
                         'email' => $email,
                         'guests_events' => array_keys($guests),
+                        'all_declined' => $all_declined,
+                        'email_type' => $all_declined ? 'decline' : 'confirmation',
                         'admin_email_sent' => $admin_sent,
                         'guest_email_sent' => $guest_sent
                     ]
