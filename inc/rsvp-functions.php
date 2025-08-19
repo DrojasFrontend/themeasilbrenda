@@ -268,7 +268,7 @@ function checkIfAllDecline($guests) {
  * Function to send emotional email when all guests decline all events
  */
 function sendDeclineEmail($guest_name, $email) {
-    $subject = '💔 We\'ll miss you - Asil & Brenda\'s Wedding';
+    $subject = 'RSVP Received – We\'ll Miss You!';
     
     $message = '
     <!DOCTYPE html>
@@ -295,8 +295,8 @@ function sendDeclineEmail($guest_name, $email) {
     <body>
         <div class="container">
             <div class="header">
-                <h1>💔 We\'ll miss you</h1>
-                <p>Asil & Brenda</p>
+                <h1>RSVP Received</h1>
+                <p>We\'ll Miss You!</p>
             </div>
             
             <div class="content">
@@ -305,29 +305,18 @@ function sendDeclineEmail($guest_name, $email) {
                 </div>
                 
                 <div class="message">
-                    We have received your response and although we are sad that you won\'t be able to join us 
-                    on our special day, we completely understand.<br><br>
-                    Your friendship means so much to us and even though you won\'t be physically present, 
-                    you know you will have a special place in our hearts that day.
-                </div>
-                
-                <div class="highlight">
-                    <span class="heart">💕</span> "Distance cannot separate hearts that truly love" <span class="heart">💕</span>
+                    Thank you for letting us know.<br><br>
+                    We\'ll miss you on our special day, but we truly appreciate your kind wishes and thoughts.
                 </div>
                 
                 <div class="divider"></div>
-                
-                <div class="highlight">
-                    We love you and we\'re going to miss you so much! 🥺
-                </div>
             </div>
             
             <div class="footer">
-                <h3>With all our love ❤️</h3>
+                <h3>With love,</h3>
                 <p><strong>Asil & Brenda</strong></p>
                 <div style="margin-top: 20px; padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.3);">
                     <p style="font-size: 12px;">December 13th, 2025 • Cartagena de Indias, Colombia</p>
-                    <p style="font-size: 12px;">Even though you won\'t be present, you\'ll be in our hearts</p>
                 </div>
             </div>
         </div>
